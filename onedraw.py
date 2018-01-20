@@ -10,6 +10,8 @@ onedrawディレクトリが存在しない時にエラーになる不具合を�
 v0.0.3
 複数ファイルで日付が異なる場合、日付を選ばせるようにした
 年を4桁にした
+v0.0.4
+単一画像ファイルだとdtが存在しないためにエラーになるバグを修正
 """
 
 import sys
@@ -69,6 +71,8 @@ if __name__ == '__main__':
         except IndexError:
             print('out of range!')
             exit(1)
+    else:
+        dt = dts[0]
 
     new_dir_name = "{}_{}".format(dt.strftime('%Y%m%d'), path.stem)
 
