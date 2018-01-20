@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 """
 onedraw.py
+v0.0.1
+git管理を始めた
+v0.0.2
+複数ファイルを渡したときにうまく動作しない不具合を修正
+月や日付が1桁のときに名前が短くなってしまう不具合を修正
+onedrawディレクトリが存在しない時にエラーになる不具合を修正
 """
 
 import sys
@@ -9,7 +15,7 @@ import datetime
 import shutil
 from pathlib import Path
 
-version = '0.0.1'
+version = '0.0.2'
 
 if __name__ == '__main__':
     print('onedraw.py v{}'.format(version))
@@ -43,12 +49,17 @@ if __name__ == '__main__':
             print('diffday exist!')
             exit(1)
 
-    new_dir_name = "{}{}{}_{}".format(dt.year, dt.month, dt.day, path.stem)
+    new_dir_name = "{}_{}".format(dt.strftime('%y%m%d'), path.stem)
+
+    onedraw_path = Path('onedraw')
+    if not onedraw_path.exists():
+        onedraw_path.mkdir()
     
     if is_single_dir:
         shutil.move(path.name, "onedraw/{}".format(new_dir_name))
     else:
+        os.mkdir('onedraw/{}'.format(new_dir_name))
         for i in files:
-            shutil.move(i.name, 'onedraw/{}/'.format(new_dir_name))
+            shutil.move(i.name, 'onedraw/{}/{}'.format(new_dir_name, i.name))
     print('moved!')
     exit(0)
