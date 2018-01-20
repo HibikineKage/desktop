@@ -18,7 +18,7 @@ import datetime
 import shutil
 from pathlib import Path
 
-version = '0.0.3'
+version = '0.0.4'
 
 def is_diff_day_exist(dts):
     dt = dts[0]
