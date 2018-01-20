@@ -18,7 +18,8 @@ import datetime
 import shutil
 from pathlib import Path
 
-version = '0.0.4'
+version = '0.0.3'
+
 
 def is_diff_day_exist(dts):
     dt = dts[0]
@@ -27,7 +28,7 @@ def is_diff_day_exist(dts):
         if dt.year != x.year or dt.month != x.month or dt.day != x.day:
             return True
     return False
-             
+
 
 if __name__ == '__main__':
     print('onedraw.py v{}'.format(version))
@@ -51,7 +52,7 @@ if __name__ == '__main__':
     else:
         files = paths
         timestamps = [os.stat(path.name).st_mtime for f in files]
-        
+
     # 時間を取得
     dts = [datetime.datetime.fromtimestamp(ts) for ts in timestamps]
     if is_diff_day_exist(dts):
@@ -74,7 +75,7 @@ if __name__ == '__main__':
     onedraw_path = Path('onedraw')
     if not onedraw_path.exists():
         onedraw_path.mkdir()
-    
+
     if is_single_dir:
         shutil.move(path.name, "onedraw/{}".format(new_dir_name))
     else:
